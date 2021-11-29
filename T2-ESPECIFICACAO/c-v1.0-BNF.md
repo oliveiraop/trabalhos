@@ -4,15 +4,7 @@
 
 ### BNF para C- (v1.0)
 
-<program> ::= <declaration-list>
-
-<declaration-list> ::= <declaration-list> <declaration> | <declaration>
-
-<declaration> ::= <var-declaration> | <fun-declaration>
-
-<var-declaration> ::= <type-specifier> ID ; | <type-specifier> ID [ NUM ] ;
-
-<type-specifier> ::= int | void```
+```
 <program> ::= <declaration-list>
 
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
