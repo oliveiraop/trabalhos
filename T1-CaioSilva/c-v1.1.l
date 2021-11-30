@@ -1,6 +1,6 @@
 /*FLEX*/
 /*Autor: Caio Silva Pontes*/
-%option noyywrap yylineno
+%option noyywrap nodefault yylineno
 %{ 
 #include "c-v1.1.tab.h" 
 %}
