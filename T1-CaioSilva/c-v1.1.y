@@ -21,8 +21,8 @@ int yylex();
 %%
 
 program
-: /* empty */
-;
+ /* empty */
+
 
 %%
 
