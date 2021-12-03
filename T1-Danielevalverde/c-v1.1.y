@@ -1,6 +1,5 @@
-
 %{
-
+#include <stdlib.h>
 #include <stdio.h>
 
 void yyerror(const char* msg) {
@@ -10,9 +9,6 @@ void yyerror(const char* msg) {
 int yylex();
 %}
 
-
-/* tokens */
-
 %token KEY
 %token NUM
 %token ID
@@ -21,7 +17,8 @@ int yylex();
 
 %%
 
-program:
-/* void */
+program
+: /* empty */
+;
 
 %%

@@ -2,63 +2,58 @@
 * Autora: Daniele Valverde
 */
 
-%option noyywrap nodefault yylineno
-
-%{
+%option noyywrap yylineno
+%{ 
 #include "c-v1.1.tab.h"
-
-void yyerror(char *s);
-
 %}
 
 %%
 
-const                 { return KEY; }
-else                  { return KEY; }
-for                   { return KEY; }
-if                    { return KEY; }
-int                   { return KEY; }
-return                { return KEY; } 
-void                  { return KEY; }
-while                 { return KEY; }
+else                        { return KEY; }
+if                          { return KEY; }
+int                         { return KEY; }
+return                      { return KEY; }
+void                        { return KEY; }
+while                       { return KEY; }
+const                       { return KEY; }
+for                         { return KEY; }
 
-[0-9]+                { return NUM; }
-[a-zA-Z][a-zA-Z0-9_]* { return ID; }
+[0-9]+                      { return NUM; }
+[A-Za-z]([A-Za-z]|[0-9])*   { return ID; }
+("+"|"-"|"*"|"/")           { return SYM; }
+("="|"<"|">")               { return SYM; }
+("<="|">="|"=="|"!=")       { return SYM; }
+(";"|",")                   { return SYM; }
+("("|")"|"["|"]"|"{"|"}")   { return SYM; }
 
-"+"                   { return SYM; }    
-"-"                   { return SYM; }    
-"/"                   { return SYM; }    
-"*"                   { return SYM; }    
-"="                   { return SYM; }    
-";"                   { return SYM; }    
-","                   { return SYM; }    
-"("                   { return SYM; }    
-")"                   { return SYM; }    
-"{"                   { return SYM; }    
-"}"                   { return SYM; }    
-"["                   { return SYM; }    
-"]"                   { return SYM; }    
-"=="                  { return SYM; }    
-"!="                  { return SYM; }    
-"<"                   { return SYM; }    
-"<="                  { return SYM; }    
-">"                   { return SYM; }    
-">="                  { return SYM; }    
+[ \t\n]                     { /* no action */ }
+"//".*                      { /* no action */ }
 
-"//".*                { /* void */ }
-[ \n\t]+              { /* void */ }
-.                     {return ERROR;}
+.                           { return ERROR; }
+
 
 %%
 
 int main(int argc, char **argv) {
     int token;
 
-    char *token_name[5] = {"KEY", "NUM", "ID","SYM","ERROR"};
-
     while ((token = yylex())) {
-       fprintf(stdout,"(%d", yylineno);
-       fprintf(stdout,",%s", token_name[token-258]);
-       fprintf(stdout,",\"%s\")\n", yytext);
+        switch (token) {
+         case ERROR:
+            printf("(%d,ERROR,\"%s\")\n", yylineno, yytext);
+            break;
+         case NUM: 
+            printf("(%d,NUM,\"%s\")\n", yylineno, yytext);
+            break; 
+         case ID: 
+            printf("(%d,ID,\"%s\")\n", yylineno, yytext);
+            break;
+         case KEY:
+            printf("(%d,KEY,\"%s\")\n", yylineno, yytext);
+            break;
+         case SYM: 
+            printf("(%d,SYM,\"%s\")\n", yylineno, yytext);
+            break;
+        }
     }
 }
