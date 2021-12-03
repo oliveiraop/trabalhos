@@ -15,35 +15,35 @@ int yylex();
 %}
 
 %token ERROR
-%token keyelse
-%token keyif
-%token keyint
-%token keyreturn
-%token keyvoid
-%token keywhile
-%token keyconst
-%token keyfor
+%token KEYELSE
+%token KEYIF
+%token KEYINT
+%token KEYRETURN
+%token KEYVOID
+%token KEYWHILE
+%token KEYCONST
+%token KEYFOR
 %token ID
 %token NUM
-%token plus
-%token minus
-%token division
-%token mult
-%token semicolon
-%token oparent
-%token cparent
-%token equal
-%token okey
-%token ckey
-%token lessthan
-%token lessequal
-%token biggerthan
-%token biggerequal
-%token equalequal
-%token colon
-%token obrackets
-%token cbrackets
-%token notequal
+%token PLUS
+%token MINUS
+%token DIVISION
+%token MULT
+%token SEMICOLON
+%token OPARENT
+%token CPARENT
+%token EQUAL
+%token OKEY
+%token CKEY
+%token LESSTHAN
+%token LESSEQUAL
+%token BIGGERTHAN
+%token BIGGEREQUAL
+%token EQUALEQUAL
+%token COLON
+%token OBRACKETS
+%token CBRACKETS
+%token NOTEQUAL
 
 %%
 
@@ -53,29 +53,29 @@ declarationList : declarationList declaration | declaration;
 
 declaration : varDeclaration | funDeclaration;
 
-varDeclaration : typeSpecifier ID semicolon
-               | typeSpecifier ID obrackets NUM cbrackets semicolon
+varDeclaration : typeSpecifier ID SEMICOLON
+               | typeSpecifier ID OBRACKETS NUM CBRACKETS SEMICOLON
                ;
 
-typeSpecifier : keyint
-              | keyvoid
+typeSpecifier : KEYINT
+              | KEYVOID
               ;
 
-funDeclaration : typeSpecifier ID oparent params cparent compoundStmt;
+funDeclaration : typeSpecifier ID OPARENT params CPARENT compoundStmt;
 
 params : paramList
-       | keyvoid
+       | KEYVOID
        ;
 
-paramList : paramList colon param
+paramList : paramList COLON param
           | param
           ;
 
 param : typeSpecifier ID
-      | typeSpecifier ID obrackets cbrackets
+      | typeSpecifier ID OBRACKETS CBRACKETS
       ;
 
-compoundStmt : okey localDeclarations statementList ckey
+compoundStmt : OKEY localDeclarations statementList CKEY
              ;
 
 localDeclarations : localDeclarations varDeclaration
@@ -93,68 +93,69 @@ statement : expressionStmt
           | returnStmt
           ;
 
-expressionStmt : expression semicolon
-               | semicolon
+expressionStmt : expression SEMICOLON
+               | SEMICOLON
                ;
 
-selectionStmt : keyif oparent expression cparent statement
-              | keyif oparent expression cparent statement keyelse statement
+selectionStmt : KEYIF OPARENT expression CPARENT statement
+              | KEYIF OPARENT expression CPARENT statement KEYELSE statement
               ;
 
-iterationStmt : keywhile oparent expression cparent statement;
+iterationStmt : KEYWHILE OPARENT expression CPARENT statement;
 
-returnStmt : keyreturn semicolon
-           | keyreturn expression semicolon
+returnStmt : KEYRETURN SEMICOLON
+           | KEYRETURN expression SEMICOLON
            ;
 
-expression : var equal expression
+expression : var EQUAL expression
            | simpleExpression
            ;
 
 var : ID
-    | ID obrackets expression cbrackets
+    | ID OBRACKETS expression CBRACKETS
     ;
 
 simpleExpression : additiveExpression relop additiveExpression
                  | additiveExpression
                  ;
 
-relop : lessequal
-      | lessthan
-      | biggerthan
-      | biggerequal
-      | equalequal
-      | notequal
+relop : LESSEQUAL
+      | LESSTHAN
+      | BIGGERTHAN
+      | BIGGEREQUAL
+      | EQUALEQUAL
+      | NOTEQUAL
       ;
 
 additiveExpression : additiveExpression addop term
                    | term
                    ;
 
-addop : plus
-      | minus
+addop : PLUS
+      | MINUS
       ;
 
 term : term mulop factor
      | factor
      ;
 
-mulop : mult
-      | division
+mulop : MULT
+      | DIVISION
       ;
-factor : oparent expression cparent
+
+factor : OPARENT expression CPARENT
        | var
        | call
        | NUM
        ;
 
-call : ID oparent args cparent;
+call : ID OPARENT args CPARENT;
 
 args : argList
      |
      ;
 
-argList : argList colon expression
+argList : argList COLON expression
         | expression
         ;
 

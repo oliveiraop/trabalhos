@@ -11,35 +11,35 @@
 %%
 
 "//".*                      { /* no action */ }
-else                        { return keyelse; }
-if                          { return keyif; }
-int                         { return keyint; }
-return                      { return keyreturn; }
-void                        { return keyvoid; }
-while                       { return keywhile; }
-const                       { return keyconst; }
-for                         { return keyfor; }
+else                        { return KEYELSE; }
+if                          { return KEYIF; }
+int                         { return KEYINT; }
+return                      { return KEYRETURN; }
+void                        { return KEYVOID; }
+while                       { return KEYWHILE; }
+const                       { return KEYCONST; }
+for                         { return KEYFOR; }
 [A-Za-z]([A-Za-z]|[0-9])*   { return ID; }
 [0-9]+                      { return NUM; }
-"+"                   { return plus; }
-"-"                   { return minus; }
-"/"                   { return division; }
-"*"                   { return mult; }
-";"                   { return semicolon; }
-"("                   { return oparent; }
-")"                   { return cparent; }
-"="                   { return equal; }
-"{"                   { return okey; }
-"}"                   { return ckey; }
-"<"                   { return lessthan; }
-"<="                  { return lessequal; }
-">"                   { return biggerthan; }
-">="                  { return biggerequal; }
-"=="                  { return equalequal; }
-","                   { return colon; }
-"["                   { return obrackets; }
-"]"                   { return cbrackets; }
-"!="                  { return notequal; }
+"+"                         { return PLUS; }
+"-"                         { return MINUS; }
+"/"                         { return DIVISION; }
+"*"                         { return MULT; }
+";"                         { return SEMICOLON; }
+"("                         { return OPARENT; }
+")"                         { return CPARENT; }
+"="                         { return EQUAL; }
+"{"                         { return OKEY; }
+"}"                         { return CKEY; }
+"<"                         { return LESSTHAN; }
+"<="                        { return LESSEQUAL; }
+">"                         { return BIGGERTHAN; }
+">="                        { return BIGGEREQUAl; }
+"=="                        { return EQUALEQUAL; }
+","                         { return COLON; }
+"["                         { return OBRACKETS; }
+"]"                         { return CBRACKETS; }
+"!="                        { return NOTEQUAL; }
 
 [ \t\n]                       { /* no action */ }
 .                           { return ERROR; }
