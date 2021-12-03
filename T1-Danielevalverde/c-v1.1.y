@@ -1,6 +1,5 @@
 
 %{
-/* includes, C defs */
 
 #include <stdio.h>
 
