@@ -57,42 +57,6 @@ for                         { return (FOR); }
 %%
 
 int main(int argc, char **argv) {
-   int token;
-   char *token_name[30] = {
-      "ELSE",
-      "IF",
-      "INT",
-      "RETURN",
-      "VOID",
-      "WHILE",
-      "CONST",
-      "FOR",
-      "ID",
-      "NUM",
-      "PLUS",
-      "MINUS",
-      "MULT",
-      "DIV",
-      "ASSIGN",
-      "LT",
-      "GT",
-      "LE",
-      "GE",
-      "EQ",
-      "NE",
-      "SEMICOLON",
-      "COMMA",
-      "LPAREN",
-      "RPAREN",
-      "LBRACE",
-      "RBRACE",
-      "LBRACK",
-      "RBRACK",
-      "ERROR",
-      };
-
-   while ((token = yylex())) {
-      printf("(%d,%s,\"%s\")\n", yylineno, token_name[token-258], yytext);
-   }
    yyparse();
+   return 0;
 }

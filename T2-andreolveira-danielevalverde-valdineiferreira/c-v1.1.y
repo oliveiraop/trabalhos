@@ -2,15 +2,19 @@
 %define parse.trace
 
 %{
+    
 #include <stdlib.h>
 #include <stdio.h>
 
-extern int yylineno, yytext;
+extern int yylineno;
+extern char *yytext;
+
 void yyerror(const char* msg) {
-    printf("(%d,\"%s\")\n", yylineno, msg);
+    printf("An error occurred on line %d, near \"%s\": %s\n", yylineno, yytext, msg); 
 }
 
 int yylex();
+
 %}
 
 %token ELSE
@@ -72,7 +76,7 @@ type-specifier: INT
     | VOID
 ;
 
-fun-declaration: type-specifier ID LPAREN params RPAREN compound-stmt SEMICOLON
+fun-declaration: type-specifier ID LPAREN params RPAREN compound-stmt
 ;
 
 const-declaration: CONST type-specifier ID ASSIGN NUM SEMICOLON
@@ -90,7 +94,7 @@ param: type-specifier ID
     | type-specifier ID LBRACK RBRACK 
 ;
 
-compound-stmt: RBRACE local-declarations statement-list LBRACE
+compound-stmt: LBRACE local-declarations statement-list RBRACE
 ;
 
 local-declarations: local-declarations var-declaration
@@ -117,7 +121,7 @@ selection-stmt: IF LPAREN expression RPAREN statement
 ;
 
 iteration-stmt: WHILE LPAREN expression RPAREN statement
-    | FOR LPAREN expression-stmt expression-stmt RPAREN statement
+    | FOR LPAREN expression-stmt expression-stmt expression RPAREN statement
 ;
 
 return-stmt: RETURN SEMICOLON 
@@ -176,4 +180,5 @@ args: arg-list
 arg-list: arg-list COMMA expression 
     | expression
 ;
+
 %%
