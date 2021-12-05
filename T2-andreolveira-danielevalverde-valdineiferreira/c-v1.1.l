@@ -6,7 +6,7 @@
 
 %}
 
-id                         [A-Za-z]([A-Za-z]|[0-9])*
+id                         [A-Za-z]([A-Za-z]|[0-9]|[_])*
 numbers                    [0-9]+
 inlinecomment              \/\/.*
 blank                      [ \t\n]+

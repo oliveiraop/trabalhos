@@ -68,7 +68,8 @@ declaration: var-declaration
     | const-declaration
 ;
 
-var-declaration: type-specifier ID SEMICOLON 
+var-declaration: type-specifier ID SEMICOLON
+    | type-specifier ID ASSIGN expression SEMICOLON
     | type-specifier ID LBRACK NUM RBRACK SEMICOLON
 ;
 
