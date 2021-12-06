@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include "ast-TEMP.h"
+#include "ast.h"
 
 struct type * type_create(type_t kind,
                   struct type *subtype,

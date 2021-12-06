@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ast-TEMP.h"
+#include "ast.h"
 #include "c-v1.1.tab.h"
 
 extern struct decl *parser_result;
