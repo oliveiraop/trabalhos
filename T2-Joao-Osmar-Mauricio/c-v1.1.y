@@ -1,18 +1,20 @@
 %{
+
 #include <stdlib.h>
 #include <stdio.h>
 
+extern void yyerror();
+extern int yyparse();
+int yylex();
 
-extern int yylineno;
-
-extern char* yytext;
-
-void yyerror(const char* msg) {
-      fprintf(stderr, "Erro sintático na linha %d char: %s\n", yylineno, yytext);
+int main() {
+    if(yyparse()==0)
+        printf("\nSem erros sintáticos.\n");
 }
 
-int yylex();
 %}
+
+%locations
 
 %token ERROR
 %token KEYELSE
@@ -49,9 +51,14 @@ int yylex();
 
 program : declarationList;
 
-declarationList : declarationList declaration | declaration;
+declarationList : declarationList declaration
+                | declaration
+                ;
 
-declaration : varDeclaration | funDeclaration;
+declaration : varDeclaration
+            | constDeclaration
+            | funDeclaration
+            ;
 
 varDeclaration : typeSpecifier ID SEMICOLON
                | typeSpecifier ID OBRACKETS NUM CBRACKETS SEMICOLON
@@ -60,6 +67,8 @@ varDeclaration : typeSpecifier ID SEMICOLON
 typeSpecifier : KEYINT
               | KEYVOID
               ;
+
+constDeclaration : KEYCONST typeSpecifier ID EQUAL NUM SEMICOLON;
 
 funDeclaration : typeSpecifier ID OPARENT params CPARENT compoundStmt;
 
@@ -79,11 +88,11 @@ compoundStmt : OKEY localDeclarations statementList CKEY
              ;
 
 localDeclarations : localDeclarations varDeclaration
-                  |
+                  | %empty
                   ;
 
 statementList : statementList statement
-              |
+              | %empty
               ;
 
 statement : expressionStmt
@@ -101,7 +110,9 @@ selectionStmt : KEYIF OPARENT expression CPARENT statement
               | KEYIF OPARENT expression CPARENT statement KEYELSE statement
               ;
 
-iterationStmt : KEYWHILE OPARENT expression CPARENT statement;
+iterationStmt : KEYWHILE OPARENT expression CPARENT statement
+              | KEYFOR OPARENT expression SEMICOLON expression SEMICOLON expression CPARENT statement
+              ;
 
 returnStmt : KEYRETURN SEMICOLON
            | KEYRETURN expression SEMICOLON
@@ -152,7 +163,7 @@ factor : OPARENT expression CPARENT
 call : ID OPARENT args CPARENT;
 
 args : argList
-     |
+     | %empty
      ;
 
 argList : argList COLON expression
