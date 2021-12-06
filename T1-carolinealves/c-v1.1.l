@@ -1,14 +1,18 @@
-/* 
-* Autora: Daniele Valverde
-*/
+/**
+
+Trabalho 1 - Compiladores
+Caroline Alves
+
+**/
 
 %option noyywrap yylineno
 %{ 
-#include "c-v1.1.tab.h"
+#include "c-v1.1.tab.h" 
 %}
 
 %%
 
+"//".*                      { /* no action */ }
 else                        { return KEY; }
 if                          { return KEY; }
 int                         { return KEY; }
@@ -17,18 +21,14 @@ void                        { return KEY; }
 while                       { return KEY; }
 const                       { return KEY; }
 for                         { return KEY; }
-
-[0-9]+                      { return NUM; }
 [A-Za-z]([A-Za-z]|[0-9])*   { return ID; }
+[0-9]+                      { return NUM; }
 ("+"|"-"|"*"|"/")           { return SYM; }
 ("="|"<"|">")               { return SYM; }
 ("<="|">="|"=="|"!=")       { return SYM; }
 (";"|",")                   { return SYM; }
 ("("|")"|"["|"]"|"{"|"}")   { return SYM; }
-
 [ \t\n]                     { /* no action */ }
-"//".*                      { /* no action */ }
-
 .                           { return ERROR; }
 
 
@@ -57,3 +57,4 @@ int main(int argc, char **argv) {
         }
     }
 }
+
