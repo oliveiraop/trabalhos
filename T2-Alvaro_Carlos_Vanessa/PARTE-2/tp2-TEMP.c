@@ -101,13 +101,6 @@ void prettyprint_func(struct decl *func) {
     printf("]");
 }
 
-// void prettyprint_enum(struct decl *enu) {
-//     printf("\n[enum-var-declaration ");
-//     prettyprint_name(enu->name);
-//     prettyprint_expr(enu->expr);
-//     printf("]");
-// }
-
 void prettyprint_enum(struct decl *enu) {
     if(enu->expr==0){
         printf("\n[enum-type-declaration ");
