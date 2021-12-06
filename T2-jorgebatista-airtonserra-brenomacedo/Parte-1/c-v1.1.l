@@ -20,28 +20,28 @@ while                       { return WHILE; }
 [A-Za-z]([A-Za-z_]|[0-9])*   { return ID; }
 [0-9]+                      { yylval = atoi(yytext); return NUM; }
 
-"+"                         { return PLUS; }
-"-"                         { return MINUS; }
-"*"                         { return MULT; }
-"/"                         { return DIV; }
-"="                         { return ASSIGN; }
+"+"                         { return '+'; }
+"-"                         { return '-'; }
+"*"                         { return '*'; }
+"/"                         { return '/'; }
+"="                         { return '='; }
 
-"<"                         { return LESS; }
-"<="                        { return LESS_EQUAL; }
-">"                         { return GREATER; }
-">="                        { return GREATER_EQUAL; }
-"=="                        { return EQUAL; }
-"!="                        { return NOT_EQUAL; }
+"<"                         { return LT; }
+"<="                        { return LTEQ; }
+">"                         { return GT; }
+">="                        { return GTEQ; }
+"=="                        { return EQ; }
+"!="                        { return NEQ; }
 
-";"                         { return SEMICOLON; }
-","                         { return COMMA; }
+";"                         { return ';'; }
+","                         { return  ','; }
 
-"("                         { return L_PARENTHESIS; }
-")"                         { return R_PARENTHESIS; }
-"["                         { return L_BRACKET; }
-"]"                         { return R_BRACKET; }
-"{"                         { return L_BRACE; }
-"}"                         { return R_BRACE; }
+"("                         { return '('; }
+")"                         { return ')'; }
+"["                         { return '['; }
+"]"                         { return ']'; }
+"{"                         { return '{'; }
+"}"                         { return '}'; }
 
 [ \t\n]                       { /* no action */ }
 

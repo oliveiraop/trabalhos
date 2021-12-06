@@ -11,10 +11,7 @@ int yylex();
 
 %token CONST ELSE FOR IF INT VOID RETURN WHILE
 %token ID NUM
-%token PLUS MINUS MULT DIV ASSIGN
-%token LESS LESS_EQUAL GREATER GREATER_EQUAL EQUAL NOT_EQUAL
-%token SEMICOLON COMMA
-%token L_PARENTHESIS R_PARENTHESIS L_BRACKET R_BRACKET L_BRACE R_BRACE
+%token LT LTEQ GT GTEQ EQ NEQ
 %token ERROR
 
 %right THEN ELSE
@@ -36,12 +33,12 @@ declaration
 ;
 
 const-declaration
-: CONST type-specifier ID ASSIGN expression-stmt
+: CONST type-specifier ID '=' expression-stmt
 ;
 
 var-declaration
-: type-specifier ID SEMICOLON
-| type-specifier ID L_BRACKET NUM R_BRACKET SEMICOLON
+: type-specifier ID ';'
+| type-specifier ID '[' NUM ']' ';'
 ;
 
 type-specifier
@@ -50,7 +47,7 @@ type-specifier
 ;
 
 fun-declaration
-: type-specifier ID L_PARENTHESIS params R_PARENTHESIS compound-stmt
+: type-specifier ID '(' params ')' compound-stmt
 ;
 
 params
@@ -59,17 +56,17 @@ params
 ;
 
 param-list
-: param-list COMMA param
+: param-list ',' param
 | param
 ;
 
 param
 : type-specifier ID
-| type-specifier ID L_BRACKET R_BRACKET
+| type-specifier ID '[' ']'
 ;
 
 compound-stmt
-: L_BRACE local-declarations statement-list R_BRACE
+: '{' local-declarations statement-list '}'
 ;
 
 local-declarations
@@ -92,37 +89,37 @@ statement
 ;
 
 expression-stmt
-: expression SEMICOLON
-| SEMICOLON
+: expression ';'
+| ';'
 ;
 
 selection-stmt
-: IF L_PARENTHESIS expression R_PARENTHESIS statement %prec THEN
-| IF L_PARENTHESIS expression R_PARENTHESIS statement ELSE statement
+: IF '(' expression ')' statement %prec THEN
+| IF '(' expression ')' statement ELSE statement
 ;
 
 iteration-stmt
-: WHILE L_PARENTHESIS expression R_PARENTHESIS statement
+: WHILE '(' expression ')' statement
 ;
 
 for-stmt
-: FOR L_PARENTHESIS expression SEMICOLON expression SEMICOLON expression R_PARENTHESIS statement
-| FOR L_PARENTHESIS type-specifier expression SEMICOLON expression SEMICOLON expression R_PARENTHESIS statement
+: FOR '(' expression ';' expression ';' expression ')' statement
+| FOR '(' type-specifier expression ';' expression ';' expression ')' statement
 ;
 
 return-stmt
-: RETURN SEMICOLON
-| RETURN expression SEMICOLON
+: RETURN ';'
+| RETURN expression ';'
 ;
 
 expression
-: var ASSIGN expression
+: var '=' expression
 | simple-expression
 ;
 
 var
 : ID
-| ID L_BRACKET expression R_BRACKET
+| ID '[' expression ']'
 ;
 
 simple-expression
@@ -131,12 +128,12 @@ simple-expression
 ;
 
 relop
-: LESS_EQUAL
-| LESS
-| GREATER
-| GREATER_EQUAL
-| EQUAL
-| NOT_EQUAL
+: LTEQ
+| LT
+| GT
+| GTEQ
+| EQ
+| NEQ
 ;
 
 additive-expression
@@ -145,8 +142,8 @@ additive-expression
 ;
 
 addop
-: PLUS
-| MINUS
+: '+'
+| '-'
 ;
 
 term
@@ -155,19 +152,19 @@ term
 ;
 
 mulop
-: MULT
-| DIV
+: '*'
+| '/'
 ;
 
 factor
-: L_PARENTHESIS expression R_PARENTHESIS
+: '(' expression ')'
 | var
 | call
 | NUM
 ;
 
 call
-: ID L_PARENTHESIS args R_PARENTHESIS
+: ID '(' args ')'
 ;
 
 args
@@ -176,7 +173,7 @@ args
 ;
 
 arg-list
-: arg-list COMMA expression
+: arg-list ',' expression
 | expression
 ;
 
