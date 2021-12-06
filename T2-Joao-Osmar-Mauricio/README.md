@@ -1,5 +1,6 @@
 # Trabalho 2
 Grupo: João Victor Carneiro, Maurício dos Santos, Osmar Oliveira 
+
 Usuários Github: jvmcarneiro, oliveiraop, mauricio-sj
 
 Disciplina: MATA61 2021.2 T01
