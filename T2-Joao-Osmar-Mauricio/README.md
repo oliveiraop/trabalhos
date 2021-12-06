@@ -17,6 +17,21 @@ Foram eles: `green-keyword-for.in`, `green-program-gcd.in`, `green-program-selec
 
 A equipe tomou a liberdade de adicionar regras sintáticas para o `for` em `iterationStmt`, e `const` em `constDeclaration`.
 
+## Parte 2
+
+A criação da AST foi feita principalmente a partir do arquivo sintático `c-v1.1.y`, onde foram adicionadas as ações semânticas a cada uma das regras sintáticas da gramática.
+Foram modificados também os arquivos `ast.c`, `ast.h` e `tp2.c` para incluir as regras de `const` e `for`, além do `compile.sh` para incluir os códigos na compilação, e também o `c-v1.1.l` para termos a saída somente em formato "labeled bracket".
+
+Ao rodar o arquivo `teste.c`, por exemplo, obtemos a seguinte saída:
+
+```
+[program
+[var-declaration [int][(null)]]
+  [var-declaration [int][(null)]]
+[void]
+]
+```
+
 ## Execução
 
 O script `run.sh` também foi modificado para receber opcionalmente apenas o argumento da entrada e criar automaticamente a pasta e extensão do arquivo de saída.

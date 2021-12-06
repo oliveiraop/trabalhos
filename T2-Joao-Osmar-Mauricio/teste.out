@@ -1,5 +1,5 @@
 [program 
 [var-declaration [int][(null)]]
-[var-declaration [int][(null)]]
+  [var-declaration [int][(null)]]
 [void]
 ]
